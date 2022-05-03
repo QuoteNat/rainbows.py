@@ -26,7 +26,11 @@ else:
 
 if args.Dictionary:
     dictionaryFilePath = args.Dictionary
-    print("Inputted " + args.Dictionary + " as dictionary")
+    print("Inputted " + args.Input)
+else:
+    dictionaryFilePath = "dictionary.txt"
+    print("No input provided, defaulting to input.json")
+
 if args.Hash:
     createHashedDatabase(inputFilePath, outputFilePath)
 
