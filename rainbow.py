@@ -1,4 +1,5 @@
 from hasher import createHashedDatabase
+from bruteforce import bruteforce
 # For commandline args
 import argparse
 
@@ -34,3 +35,5 @@ else:
 if args.Hash:
     createHashedDatabase(inputFilePath, outputFilePath)
 
+if args.Rainbow:
+    bruteforce("database.json", dictionaryFilePath, "pwned.txt")
