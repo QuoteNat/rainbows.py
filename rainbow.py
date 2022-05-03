@@ -7,7 +7,7 @@ import argparse
 
 # Get command line arguments
 inputFilePath = ""
-outputFilePath = "output.json"
+outputFilePath = "database.json"
 salt = "noSaltYet :)"
 
 parser = argparse.ArgumentParser()
@@ -27,6 +27,7 @@ else:
 plaintextFile = open(inputFilePath)
 # read it into a dictionary
 plaintext = json.loads(plaintextFile.read())
+print(json.dumps(plaintext, indent=2))
 
 # hashed dictionary
 hashed = {
@@ -40,7 +41,7 @@ hashedTemplate = {
 
 # for each account in accounts
 for account in plaintext["accounts"]:
-    newAccount = hashedTemplate
+    newAccount = hashedTemplate.copy()
     newAccount["username"] = account["username"]
     newAccount["salt"] = salt
     # hash the plaintext password NOTE: This configuration is insecure for testing purposes
@@ -50,5 +51,8 @@ for account in plaintext["accounts"]:
     hashed["accounts"].append(newAccount)
 
 # output hashed to the output json file
-hashedJson = json.dumps(hashed)
+hashedJson = json.dumps(hashed, indent=2)
 print(hashedJson)
+
+outputFile = open(outputFilePath, "w")
+outputFile.write(json.dumps(hashed, indent=2))
