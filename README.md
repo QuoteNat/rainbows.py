@@ -1,0 +1,1 @@
+A python rainbow table generator, meant as a way to demonstrate the importance of hashing passwords in databases.
