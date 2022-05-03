@@ -8,7 +8,7 @@ def readDictionary(dictionaryFile):
     dictionary = []
     for line in dictionaryFile:
         # assume the password is lower case
-        line = line.strip().lower()
+        line = line.strip()
         dictionary.append(line)
     
     return dictionary
