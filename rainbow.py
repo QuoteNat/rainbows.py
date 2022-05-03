@@ -24,10 +24,13 @@ else:
     print("No input provided, defaulting to input.json")
 
 # open the plaintext file as read only
-plaintextFile = open(inputFilePath)
+try:
+    plaintextFile = open(inputFilePath)
+except FileNotFoundError:
+    quit("Inputted file \"" + inputFilePath + "\" was not found. Exiting...")
+
 # read it into a dictionary
 plaintext = json.loads(plaintextFile.read())
-print(json.dumps(plaintext, indent=2))
 
 # hashed dictionary
 hashed = {
@@ -49,10 +52,6 @@ for account in plaintext["accounts"]:
     newAccount["hash"] = hash
     # append the hashed account to hashed
     hashed["accounts"].append(newAccount)
-
-# output hashed to the output json file
-hashedJson = json.dumps(hashed, indent=2)
-print(hashedJson)
 
 outputFile = open(outputFilePath, "w")
 outputFile.write(json.dumps(hashed, indent=2))
