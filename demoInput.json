@@ -1,0 +1,14 @@
+{
+    "accounts": [{
+        "username": "alice",
+        "password": "password"
+    },
+    {
+        "username": "bob",
+        "password": "banana"
+    },
+    {
+        "username": "secure",
+        "password": "weoruiqwuoriuqweoifudsf"
+    }]
+}
