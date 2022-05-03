@@ -1,19 +1,20 @@
-# For hashing
-import hashlib
-# For databases
-import json
+from hasher import createHashedDatabase
 # For commandline args
 import argparse
 
 # Get command line arguments
 inputFilePath = ""
+dictionaryFilePath = ""
 outputFilePath = "database.json"
-salt = "noSaltYet :)"
 
 parser = argparse.ArgumentParser()
 
 # Add arguments
-parser.add_argument("-i", "--Input", help = "Input database file with plaintext passwords")
+parser.add_argument("-i", "--Input", help = "Input database file with plaintext passwords for hashing, or hashed password for brute forcing")
+parser.add_argument("-d", "--Dictionary", help = "File path to the dictionary file used for a dictionary attack")
+# Add arguments
+parser.add_argument("-ha", "--Hash", help = "Tells rainbow.py to create a hashed password json file, if both this", action="store_true")
+parser.add_argument("-r", "--Rainbow", help = "Tells rainbow.py to attempt to brute force database.json using the provided dicitonary", action="store_true")
 args = parser.parse_args()
 
 if args.Input:
@@ -23,35 +24,9 @@ else:
     inputFilePath = "input.json"
     print("No input provided, defaulting to input.json")
 
-# open the plaintext file as read only
-try:
-    plaintextFile = open(inputFilePath)
-except FileNotFoundError:
-    quit("Inputted file \"" + inputFilePath + "\" was not found. Exiting...")
+if args.Dictionary:
+    dictionaryFilePath = args.Dictionary
+    print("Inputted " + args.Dictionary + " as dictionary")
+if args.Hash:
+    createHashedDatabase(inputFilePath, outputFilePath)
 
-# read it into a dictionary
-plaintext = json.loads(plaintextFile.read())
-
-# hashed dictionary
-hashed = {
-    "accounts": []
-}
-hashedTemplate = {
-        "username": "",
-        "salt": "",
-        "hash": ""
-}
-
-# for each account in accounts
-for account in plaintext["accounts"]:
-    newAccount = hashedTemplate.copy()
-    newAccount["username"] = account["username"]
-    newAccount["salt"] = salt
-    # hash the plaintext password NOTE: This configuration is insecure for testing purposes
-    hash = hashlib.sha256(hashlib.pbkdf2_hmac('sha256', account["password"].encode(), salt.encode(), 1)).hexdigest()
-    newAccount["hash"] = hash
-    # append the hashed account to hashed
-    hashed["accounts"].append(newAccount)
-
-outputFile = open(outputFilePath, "w")
-outputFile.write(json.dumps(hashed, indent=2))
