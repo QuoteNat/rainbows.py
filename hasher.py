@@ -31,7 +31,7 @@ def createHashedDatabase(inputFilePath, outputFilePath, rounds):
         newAccount["username"] = account["username"]
         newAccount["salt"] = salt
         # hash the plaintext password NOTE: This configuration is insecure for testing purposes
-        hash = hashlib.sha256(hashlib.pbkdf2_hmac('sha256', account["password"].encode(), salt.encode(), 1)).hexdigest()
+        hash = hashlib.sha256(hashlib.pbkdf2_hmac('sha256', account["password"].encode(), salt.encode(), rounds)).hexdigest()
         newAccount["hash"] = hash
         # append the hashed account to hashed
         hashed["accounts"].append(newAccount)
