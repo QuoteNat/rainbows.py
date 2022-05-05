@@ -44,4 +44,4 @@ def bruteforce(inputFilePath, dictionaryFilePath, outputFilePath, rounds):
                 outputFile.write(account["username"] + " " + word + "\n")
 
     stop = timeit.default_timer()
-    print("Brute forcing the hashed passwords took " + str(stop-start) + " seconds for " + str(len(database["accounts"])) + " accounts.")
+    print("Brute forcing the hashed passwords took " + "{0:.5g}".format(stop-start) + " seconds for " + str(len(database["accounts"])) + " accounts.")

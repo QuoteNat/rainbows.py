@@ -59,4 +59,4 @@ def createHashedDatabase(inputFilePath, outputFilePath, rounds):
     outputFile.write(json.dumps(hashed, indent=2))
 
     stop = timeit.default_timer()
-    print("Hashing the plaintext database took " + str(stop-start) + " seconds for " + str(len(plaintext["accounts"])) + " accounts.")
+    print("Hashing the plaintext database took " + "{0:.5g}".format(stop-start) + " seconds for " + str(len(plaintext["accounts"])) + " accounts.")
