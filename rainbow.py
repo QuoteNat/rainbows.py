@@ -7,6 +7,7 @@ import argparse
 inputFilePath = ""
 dictionaryFilePath = ""
 outputFilePath = "database.json"
+rounds = 1
 
 parser = argparse.ArgumentParser()
 
@@ -33,8 +34,12 @@ else:
     dictionaryFilePath = "dictionary.txt"
     print("No input provided, defaulting to input.json")
 
+# make sure the user hasn't entered 0 or negative rounds of hashing
+if args.Rounds and int(args.Rounds) > 0:
+    rounds = int(args.Rounds)
+
 if args.Hash:
-    createHashedDatabase(inputFilePath, outputFilePath)
+    createHashedDatabase(inputFilePath, outputFilePath, rounds)
 
 if args.Rainbow:
-    bruteforce("database.json", dictionaryFilePath, "pwned.txt")
+    bruteforce("database.json", dictionaryFilePath, "pwned.txt", rounds)

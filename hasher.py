@@ -5,7 +5,7 @@ import hashlib
 
 salt = "noSaltYet :)"
 
-def createHashedDatabase(inputFilePath, outputFilePath):
+def createHashedDatabase(inputFilePath, outputFilePath, rounds):
     # open the plaintext file as read only
     try:
         plaintextFile = open(inputFilePath)

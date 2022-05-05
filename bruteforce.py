@@ -7,13 +7,12 @@ import hashlib
 def readDictionary(dictionaryFile):
     dictionary = []
     for line in dictionaryFile:
-        # assume the password is lower case
         line = line.strip()
         dictionary.append(line)
     
     return dictionary
 
-def bruteforce(inputFilePath, dictionaryFilePath, outputFilePath):
+def bruteforce(inputFilePath, dictionaryFilePath, outputFilePath, rounds):
     # open all the needed files
     databaseFile = 0
     dictionaryFile = 0
