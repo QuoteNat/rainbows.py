@@ -16,6 +16,7 @@ parser.add_argument("-d", "--Dictionary", help = "File path to the dictionary fi
 # Add arguments
 parser.add_argument("-ha", "--Hash", help = "Tells rainbow.py to create a hashed password json file, if both this", action="store_true")
 parser.add_argument("-r", "--Rainbow", help = "Tells rainbow.py to attempt to brute force database.json using the provided dicitonary", action="store_true")
+parser.add_argument("-n", "--Rounds", help="Number of rounds to use for the hashing algorithm.")
 args = parser.parse_args()
 
 if args.Input:
