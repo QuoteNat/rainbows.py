@@ -17,7 +17,6 @@ def randString():
         randomInteger = random.randint(0, CHAR_LIMIT)
         # add random integer as a character to randString
         randString += (chr(randomInteger))
-    
     return randString
 
 def createHashedDatabase(inputFilePath, outputFilePath, rounds):
@@ -42,6 +41,8 @@ def createHashedDatabase(inputFilePath, outputFilePath, rounds):
 
     # for each account in accounts
     for account in plaintext["accounts"]:
+        # generate the random salt
+        salt = randString()
         newAccount = hashedTemplate.copy()
         newAccount["username"] = account["username"]
         newAccount["salt"] = salt
