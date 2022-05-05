@@ -54,6 +54,8 @@ def bruteforce(inputFilePath, dictionaryFilePath, outputFilePath, rounds):
             if hash == account["hash"]:
                 print(account["username"] + "'s password is " + word)
                 outputFile.write(account["username"] + " " + word + "\n")
+                # Stop attempting to brute force account by removing it from the list
+                database["accounts"].remove(account)
 
     stop = timeit.default_timer()
     print("Brute forcing the hashed passwords took " + "{0:.5g}".format(stop-start) + " seconds for " + str(len(database["accounts"])) + " accounts.")
