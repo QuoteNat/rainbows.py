@@ -4,6 +4,8 @@ import json
 import hashlib
 # For random strings
 import random
+# For timing functions
+import timeit
 
 salt = "noSaltYet :)"
 
@@ -20,6 +22,7 @@ def randString():
     return randString
 
 def createHashedDatabase(inputFilePath, outputFilePath, rounds):
+    start = timeit.default_timer()
     # open the plaintext file as read only
     try:
         plaintextFile = open(inputFilePath)
@@ -54,3 +57,6 @@ def createHashedDatabase(inputFilePath, outputFilePath, rounds):
 
     outputFile = open(outputFilePath, "w")
     outputFile.write(json.dumps(hashed, indent=2))
+
+    stop = timeit.default_timer()
+    print("Hashing the plaintext database took " + str(stop-start) + " seconds for " + str(len(plaintext["accounts"])) + " accounts.")
