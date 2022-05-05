@@ -7,13 +7,12 @@ import hashlib
 def readDictionary(dictionaryFile):
     dictionary = []
     for line in dictionaryFile:
-        # assume the password is lower case
         line = line.strip()
         dictionary.append(line)
     
     return dictionary
 
-def bruteforce(inputFilePath, dictionaryFilePath, outputFilePath):
+def bruteforce(inputFilePath, dictionaryFilePath, outputFilePath, rounds):
     # open all the needed files
     databaseFile = 0
     dictionaryFile = 0
@@ -36,7 +35,7 @@ def bruteforce(inputFilePath, dictionaryFilePath, outputFilePath):
     dictionary = readDictionary(dictionaryFile)
     for word in dictionary:
         for account in database["accounts"]:
-            hash = hashlib.sha256(hashlib.pbkdf2_hmac('sha256', word.encode(), account["salt"].encode(), 1)).hexdigest()
+            hash = hashlib.sha256(hashlib.pbkdf2_hmac('sha256', word.encode(), account["salt"].encode(), rounds)).hexdigest()
             if hash == account["hash"]:
                 print(account["username"] + "'s password is " + word)
                 outputFile.write(account["username"] + " " + word + "\n")

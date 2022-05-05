@@ -7,6 +7,7 @@ import argparse
 inputFilePath = ""
 dictionaryFilePath = ""
 outputFilePath = "database.json"
+rounds = 1
 
 parser = argparse.ArgumentParser()
 
@@ -16,6 +17,7 @@ parser.add_argument("-d", "--Dictionary", help = "File path to the dictionary fi
 # Add arguments
 parser.add_argument("-ha", "--Hash", help = "Tells rainbow.py to create a hashed password json file, if both this", action="store_true")
 parser.add_argument("-r", "--Rainbow", help = "Tells rainbow.py to attempt to brute force database.json using the provided dicitonary", action="store_true")
+parser.add_argument("-n", "--Rounds", help="Number of rounds to use for the hashing algorithm.")
 args = parser.parse_args()
 
 if args.Input:
@@ -32,8 +34,12 @@ else:
     dictionaryFilePath = "dictionary.txt"
     print("No input provided, defaulting to input.json")
 
+# make sure the user hasn't entered 0 or negative rounds of hashing
+if args.Rounds and int(args.Rounds) > 0:
+    rounds = int(args.Rounds)
+
 if args.Hash:
-    createHashedDatabase(inputFilePath, outputFilePath)
+    createHashedDatabase(inputFilePath, outputFilePath, rounds)
 
 if args.Rainbow:
-    bruteforce("database.json", dictionaryFilePath, "pwned.txt")
+    bruteforce("database.json", dictionaryFilePath, "pwned.txt", rounds)
