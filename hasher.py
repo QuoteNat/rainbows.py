@@ -13,6 +13,9 @@ CHAR_LIMIT = 255
 
 # Generates a random 10 character string
 def randString():
+    """Generate and return a random string.
+
+    """
     randString = ""
     for _ in range(10):
         # pick a random number between 0 and 255
@@ -22,6 +25,13 @@ def randString():
     return randString
 
 def createHashedDatabase(inputFilePath, outputFilePath, rounds):
+    """Hash the passwords in a plaintext password database with random salts.
+
+    Parmeters:
+    inputFilepath: path to the input file
+    outputFilePath: path to the output file
+    rounds: number of rounds to use when hashing
+    """
     start = timeit.default_timer()
     # open the plaintext file as read only
     try:

@@ -7,6 +7,10 @@ import timeit
 
 # Reads and filters a dictionary database
 def readDictionary(dictionaryFile):
+    """Reads the dictionary file into an array.
+    
+    dictionaryFile: File path to the dictionary
+    """
     dictionary = []
     for line in dictionaryFile:
         line = line.strip()
@@ -15,6 +19,14 @@ def readDictionary(dictionaryFile):
     return dictionary
 
 def bruteforce(inputFilePath, dictionaryFilePath, outputFilePath, rounds):
+    """Attempts to brute force a hashed password database using a provided dictionary.
+
+    Arguments:
+    inputFilePath: path to the database
+    dictionaryFilePath: path to the dictionary
+    outputFilePath: file to write brute forced passwords to
+    rounds: number of rounds to use when hashing
+    """
     start = timeit.default_timer()
     # open all the needed files
     databaseFile = 0
