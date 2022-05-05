@@ -2,8 +2,22 @@
 import json
 # For hashing
 import hashlib
+# For random strings
+import random
 
 salt = "noSaltYet :)"
+
+CHAR_LIMIT = 255
+
+# Generates a random 10 character string
+def randString():
+    randString = ""
+    for _ in range(10):
+        # pick a random number between 0 and 255
+        randomInteger = random.randint(0, CHAR_LIMIT)
+        # add random integer as a character to randString
+        randString += (chr(randomInteger))
+    return randString
 
 def createHashedDatabase(inputFilePath, outputFilePath, rounds):
     # open the plaintext file as read only
@@ -27,6 +41,8 @@ def createHashedDatabase(inputFilePath, outputFilePath, rounds):
 
     # for each account in accounts
     for account in plaintext["accounts"]:
+        # generate the random salt
+        salt = randString()
         newAccount = hashedTemplate.copy()
         newAccount["username"] = account["username"]
         newAccount["salt"] = salt

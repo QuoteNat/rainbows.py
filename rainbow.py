@@ -32,7 +32,7 @@ if args.Dictionary:
     print("Inputted " + args.Input)
 else:
     dictionaryFilePath = "dictionary.txt"
-    print("No input provided, defaulting to input.json")
+    print("No dictionary provided, defaulting to dictionary.txt")
 
 # make sure the user hasn't entered 0 or negative rounds of hashing
 if args.Rounds and int(args.Rounds) > 0:
