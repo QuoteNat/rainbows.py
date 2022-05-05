@@ -2,6 +2,8 @@
 import json
 # For hashing
 import hashlib
+# For run time timing
+import timeit
 
 # Reads and filters a dictionary database
 def readDictionary(dictionaryFile):
@@ -13,6 +15,7 @@ def readDictionary(dictionaryFile):
     return dictionary
 
 def bruteforce(inputFilePath, dictionaryFilePath, outputFilePath, rounds):
+    start = timeit.default_timer()
     # open all the needed files
     databaseFile = 0
     dictionaryFile = 0
@@ -39,3 +42,6 @@ def bruteforce(inputFilePath, dictionaryFilePath, outputFilePath, rounds):
             if hash == account["hash"]:
                 print(account["username"] + "'s password is " + word)
                 outputFile.write(account["username"] + " " + word + "\n")
+
+    stop = timeit.default_timer()
+    print("Brute forcing the hashed passwords took " + str(stop-start) + " seconds for " + str(len(database["accounts"])) + " accounts.")
